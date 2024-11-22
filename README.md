@@ -59,14 +59,13 @@ do{
 - Se Llama otro metodo tipo boolean llamado `EstaLleno` que revisa si esta lleno  
 - se Imprime el estado de la matriz despues de cada turno con un metodo `ImprimirMatriz`
 # Buscaminas
-
 ## reglas
-
-# Battleship
 las reglas son simples, se genera un tablero, dentro de el tablero se pueden generar espacios vacios, espacios con numeros, y espacios con minas.
 - los espacios una vez se hace click se descubren el resto de espacios vacios adyacentes.
 - Algunas casillas tienen un número, este número indica las minas que son en todas las casillas circundantes. Así, si una casilla tiene el número 3, significa que de las ocho casillas que hay alrededor hay 3 con minas y 5 sin minas.
 - Si se descubre una casilla con una mina se pierde la partida.
 - Se puede poner una marca en las casillas que el jugador piensa que hay minas para ayudar a descubrir la que están cerca.
 - Se puede poner una marca en las casillas que el jugador piensa que hay minas para ayudar a descubrir la que están cerca.
+# Battleship
+
 ## reglas
