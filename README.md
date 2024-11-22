@@ -15,17 +15,17 @@
 
 - Metodos
 
-> `CrearTablero` Metodo retorna tablero
+> `CrearTablero` Metodo retorna tablero => Ariel Castillo
 > 
-> `ImprimirTablero`Metodo void imprime matriz
+> `ImprimirTablero`Metodo void imprime matriz => Luis Franco
 > 
-> `MetodoXO` Retorna una matriz con el char respectivo
+> `MetodoXO` Retorna una matriz con el char respectivo => Juan Fernando
 > 
-> `SimbolosConsecutivos`Metodo boolean que revisa si alguien ha ganado
+> `SimbolosConsecutivos`Metodo boolean que revisa si alguien ha ganado => Leonardo
 > 
-> `EstaLLeno` Metodo boolean que revisa si esta lleno
+> `EstaLLeno` Metodo boolean que revisa si esta lleno => Abraham
 > 
-> `Estarepetido` Metodo boolean que verifique si una casilla esta llena
+> `Estarepetido` Metodo boolean que verifique si una casilla esta llena => Raihane
 
 - Programa tiene que dejar a dos jugadores ingresar una coordenada de forma alterna.
 
@@ -63,5 +63,10 @@ do{
 ## reglas
 
 # Battleship
-
+las reglas son simples, se genera un tablero, dentro de el tablero se pueden generar espacios vacios, espacios con numeros, y espacios con minas.
+- los espacios una vez se hace click se descubren el resto de espacios vacios adyacentes.
+- Algunas casillas tienen un número, este número indica las minas que son en todas las casillas circundantes. Así, si una casilla tiene el número 3, significa que de las ocho casillas que hay alrededor hay 3 con minas y 5 sin minas.
+- Si se descubre una casilla con una mina se pierde la partida.
+- Se puede poner una marca en las casillas que el jugador piensa que hay minas para ayudar a descubrir la que están cerca.
+- Se puede poner una marca en las casillas que el jugador piensa que hay minas para ayudar a descubrir la que están cerca.
 ## reglas
