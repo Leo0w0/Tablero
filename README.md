@@ -60,18 +60,31 @@ do{
 - se Imprime el estado de la matriz despues de cada turno con un metodo `ImprimirMatriz`
 # Battleship
 >`CrearTablero` crea las dos matrices vacias
+>
 >`Colocar barcos`
+>
 >`validar posiciones` que verifique que las posiciones esten dentro del tablero, que esten en lineas rectas
+>
 >`disparos` procesar los disparos
+>
 >`validacion de los disparos` validar que no sea un disparo repetido
+>
 >`validar impacto` ver si el disparo le dio al barco, y agregarlo
+>
 >>`actualizar los tableros`
+>>
 >`cambiar los turnos de los jugadores`
+>
 >`validar ganador`
+>
 >
 ## reglas
 >Tablero de 10x10
+>
 >Los barcos: 1 de 4 casillas, 2 de 3 casillas y 3 de 2 casillas
+>
 >Los barcos deben de estar en linea recta (horizontal y vertical), no diagonales ni sobreponerse
+>
 >No se puede disparar dos veces en la misma posicion
+>
 >Informar si el disparo impacto al agua, toco al barco o lo hundio(ya cuando impacto todas las partes del barco)
