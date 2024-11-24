@@ -110,21 +110,35 @@ public class Juegos {
     public static boolean empate(char[][] tablero) {
         boolean isFull = true;
         boolean empate = false;
+<<<<<<< HEAD
         
         for(int i = 0; i < tablero.length; i++) {
             for(int j = 0; j < tablero[i].length; j++) {
                 if(tablero[i][j] == ' ') {
+=======
+
+        for (int i = 0; i < tablero.length; i++) {
+            for (int j = 0; j < tablero[i].length; j++) {
+                if (tablero[i][j] == ' ') {
+>>>>>>> e8ada2411a13c40e9443da6c813825d29238d1ae
                     isFull = false;
                 }
             }
         }
+<<<<<<< HEAD
         
         boolean hayGanador = SimbolosConsecutivos(tablero); // Aquí usamos el método SimbolosConsecutivos
         
         if(isFull && (!hayGanador)) {
+=======
+
+        boolean hayGanador = false; // Aqui iria el metodo 'SimbolosConsecutivos(tablero)'
+
+        if (isFull && (!hayGanador)) {
+>>>>>>> e8ada2411a13c40e9443da6c813825d29238d1ae
             empate = true;
         }
-        
+
         return empate;
     }
     public static boolean SimbolosConsecutivos(char[][] tablero) {
