@@ -66,6 +66,18 @@ public class Juegos {
             int col = leer.nextInt();
 
             tablero = MetodoX0(tablero, fil, col, Jugador); //// Remplazando el tablero anterior por el nuevo con las nuevas cordenadas
+
+            if (ganador(tablero, Jugador)) {
+                imprimirTableroX0(tablero);
+                System.out.println("El jugador" + " " + Jugador + " " + "gana");
+                break;
+            }
+
+            if (empate(tablero)) {
+                imprimirTableroX0(tablero);
+                System.out.println("Es un empate");
+                break;
+            }
         }
 
     }
@@ -107,40 +119,32 @@ public class Juegos {
         }
     }
 
+    public static boolean ganador(char[][] tablero, char jugador) {
+        return SimbolosConsecutivos(tablero); //Aqui retorna quien fue el jugador que gano
+    }
+
     public static boolean empate(char[][] tablero) {
-        boolean isFull = true;
-        boolean empate = false;
-<<<<<<< HEAD
-        
-        for(int i = 0; i < tablero.length; i++) {
-            for(int j = 0; j < tablero[i].length; j++) {
-                if(tablero[i][j] == ' ') {
-=======
 
         for (int i = 0; i < tablero.length; i++) {
             for (int j = 0; j < tablero[i].length; j++) {
                 if (tablero[i][j] == ' ') {
->>>>>>> e8ada2411a13c40e9443da6c813825d29238d1ae
-                    isFull = false;
+
+                    for (int x = 0; x < tablero.length; x++) {
+                        for (int y = 0; y < tablero[x].length; y++) {
+                            if (tablero[x][y] == ' ') {
+
+                                return false;
+                            }
+                        }
+                    }
+
                 }
             }
         }
-<<<<<<< HEAD
-        
-        boolean hayGanador = SimbolosConsecutivos(tablero); // Aquí usamos el método SimbolosConsecutivos
-        
-        if(isFull && (!hayGanador)) {
-=======
+        return true;
 
-        boolean hayGanador = false; // Aqui iria el metodo 'SimbolosConsecutivos(tablero)'
-
-        if (isFull && (!hayGanador)) {
->>>>>>> e8ada2411a13c40e9443da6c813825d29238d1ae
-            empate = true;
-        }
-
-        return empate;
     }
+
     public static boolean SimbolosConsecutivos(char[][] tablero) {
         // Verificar filas
         for (int i = 0; i < 3; i++) {
@@ -148,24 +152,24 @@ public class Juegos {
                 return true;
             }
         }
-        
+
         // Verificar columnas
         for (int j = 0; j < 3; j++) {
             if (tablero[0][j] != ' ' && tablero[0][j] == tablero[1][j] && tablero[1][j] == tablero[2][j]) {
                 return true;
             }
         }
-        
+
         // Verificar diagonal principal
         if (tablero[0][0] != ' ' && tablero[0][0] == tablero[1][1] && tablero[1][1] == tablero[2][2]) {
             return true;
         }
-        
+
         // Verificar diagonal secundaria
         if (tablero[0][2] != ' ' && tablero[0][2] == tablero[1][1] && tablero[1][1] == tablero[2][0]) {
             return true;
         }
-        
+
         return false;
     }
 }
