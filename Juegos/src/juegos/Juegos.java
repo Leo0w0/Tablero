@@ -59,7 +59,7 @@ public class Juegos {
             } else {
                 Jugador = '0';
             }
-            System.out.println("Turno del jugador " + turno % 2);
+            System.out.println("Turno del jugador " + ((turno%2)+1) + " (" + Jugador + ")");
             System.out.print("Ingrese la fila (0-2): ");
             int fil = leer.nextInt();
             System.out.print("Ingrese la columna (0-2): ");
@@ -102,7 +102,6 @@ public class Juegos {
         return tablero;
     }
 
-    // Hecho por Luis Franco
     public static void imprimirTableroX0(char[][] tablero) {
         for (int i = 0; i < tablero.length; i++) {
             for (int j = 0; j < tablero[i].length; j++) {
