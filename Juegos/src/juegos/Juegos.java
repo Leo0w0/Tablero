@@ -48,5 +48,17 @@ public class Juegos {
         }
     return true;
     }
+
+    public static boolean Ganador(char[][] tablero){
+        for(int i = 0; i < tablero.length; i++){
+            for(int j = 0; j < tablero[i].length; j++){
+                if (tablero[i][j] == 'X'){///////// Aqui va la variable que se utiliza si hay un barco
+                    return false;
+                }
+            }
+        }
+    return true;
+    }
+
 }
 
