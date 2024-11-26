@@ -178,23 +178,26 @@ public static void JugarBattleShip() {
         int columnas = 7;
         int turnos = 15;
         int turnosRestantes = turnos;
+        int numBarcos = 3;
+        int tamanoBarco = 3;
 
-        char[][] matrizPrincipal = new char[filas][columnas];
-        char[][] matrizVisible = new char[filas][columnas];
         
+        char[][] matrizVisible = new char[filas][columnas];
+        int[][] tablero = GenerarBarcos(filas, columnas, numBarcos, tamanoBarco);
+        int[][] matrizPrincipal = tablero;
         matrizVisible = MatrizVisible(matrizVisible, filas, columnas); ///////Inicializar La matriz Visible        
         boolean[][] disparosRealizados = new boolean[filas][columnas]; //////// Matriz hecha para rastrear los disparos -Juan
 
         int x = -1; /// Inicio las variables en -1 para que entren al while
         int y = -1;
 
-        while (true || turnosRestantes > 0) { ////ciclo entero del juego, aca van los boolean que terminan el ciclo - Juan
+        while ( turnosRestantes > 0) { ////ciclo entero del juego, aca van los boolean que terminan el ciclo - Juan
 
             System.out.println("Turnos restantes: " + turnosRestantes);
 
             boolean EsValido = false; ///// Variable que decide si deja pasar las coordenadas -Juan
 
-            while (EsValido == false || x < 0 || x >= filas || y < 0 || y >= columnas) { //////// Dejar salir las coordenadas siempre y cuando sean validas -Juan
+            while (!EsValido) { //////// Dejar salir las coordenadas siempre y cuando sean validas -Juan
 
                 ImprimirMatriz(matrizVisible);
 
@@ -218,7 +221,7 @@ public static void JugarBattleShip() {
                 registrarDisparo(matrizPrincipal, matrizVisible, x, y);
             }
 
-            if (!Ganador(matrizPrincipal)) {
+            if (Ganador(matrizVisible, matrizPrincipal)) {
                 System.out.println("Ha hundido todos los barcos");
                 ImprimirMatriz(matrizPrincipal);
                 turnosRestantes = -1;
@@ -227,17 +230,60 @@ public static void JugarBattleShip() {
             /// ACA VA EL METODO QUE REGISTRA EL DISPARO YA CUANDO LAS COORDENADAS SEAN VALIDAS
             /// SE RESTA UN TURNO MENOS -Juan
             turnosRestantes--;
+            
+            if(turnosRestantes == 0){
+                System.out.println("Se acabaron los turnos");
+                ImprimirMatriz(matrizPrincipal);
+                break;
+            }
 
         }
 
-        if (turnos < 0) { /// Si se queda sin turnos es una manera de salirse del ciclo principal -Juan
-            System.out.println("Se ha quedado sin turnos");
-        }
+        
 
     }
 
-    static void registrarDisparo(char[][] matrizPrincipal, char[][] matrizVisible, int fila, int colum) {
-        if (matrizPrincipal[fila][colum] == 'X') {
+    public static int[][] GenerarBarcos(int filas, int columnas, int numBarcos, int tamanoBarco) {
+        Random r = new Random();
+        int[][] tablero = new int[filas][columnas];
+
+        for (int b = 0; b < numBarcos; b++) {
+            boolean colocado = false;
+
+            while (!colocado) {
+                int filaInicio = r.nextInt(filas);
+                int columnaInicio = r.nextInt(columnas);
+
+                // Comprobar si el barco cabe horizontalmente sin salirse ni chocar con otro barco
+                if (columnaInicio + tamanoBarco <= columnas) {
+                    boolean espacioLibre = true;
+
+                    // Verificar si las celdas están libres
+                    for (int j = columnaInicio; j < columnaInicio + tamanoBarco; j++) {
+                        if (tablero[filaInicio][j] == 1) {
+                            espacioLibre = false;
+                            break;
+                        }
+                    }
+
+                    // Colocar el barco si hay espacio libre
+                    if (espacioLibre) {
+                        for (int j = columnaInicio; j < columnaInicio + tamanoBarco; j++) {
+                            tablero[filaInicio][j] = 1; // Marcar las posiciones del barco
+                        }
+                        colocado = true;
+                    }
+                }
+            }
+        }
+
+        return tablero;
+    }
+
+
+
+    static void registrarDisparo(int[][] matrizPrincipal, char[][] matrizVisible, int fila, int colum) {
+        if (matrizPrincipal[fila][colum] == 1) {
             System.out.println("Ha golpeado un barco.");
             matrizVisible[fila][colum] = 'X';
         } else {
@@ -263,6 +309,14 @@ public static void JugarBattleShip() {
             System.out.println();
         }
     }
+    static void ImprimirMatriz(int[][] matriz) {
+        for (int i = 0; i < 7; i++) {
+            for (int j = 0; j < 7; j++) {
+                System.out.print(matriz[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
     //??para imprimir la visible y la principal
 
     public static boolean validarColocacionBarco(char[][] tablero, int fila, int col, int tamano) { //?? no encuentro la variable tamano
@@ -281,11 +335,11 @@ public static void JugarBattleShip() {
         return true;
     }
 
-    public static boolean Ganador(char[][] tablero) {
+    public static boolean Ganador(char[][] tablero, int[][] matrizPrincipal) {
         int partesDeBarcosRestantes = 0;
         for (int i = 0; i < tablero.length; i++) {
             for (int j = 0; j < tablero[i].length; j++) {
-                if (tablero[i][j] == 'X') { // Busca partes de barcos
+                if (matrizPrincipal[i][j] == 1 && tablero[i][j] != 'X') { // Busca partes de barcos
                     partesDeBarcosRestantes++;
                 }
             }
