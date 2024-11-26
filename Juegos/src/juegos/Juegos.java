@@ -42,7 +42,7 @@ public class Juegos {
     public static boolean Empate(char[][] tablero){
         for (int i = 0; i < 3;i++){
             for(int j = 0; j < 3; j++){
-                if(tablero[i][j] != 'x' ||tablero[i][j] != 'X' && tablero[i][j] != '0')
+                if(tablero[i][j] != 'x' || tablero[i][j] != 'X' && tablero[i][j] != '0')
                     return false;
             }
         }
