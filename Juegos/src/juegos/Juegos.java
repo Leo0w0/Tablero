@@ -171,6 +171,36 @@ public class Juegos {
 
         return false;
     }
+    
+    
+    public static void JugarBattleShip(){
+        int filas = 7;
+        int columnas = 7;
+        int turnos = 15;
+        
+        char[][] matrizPrincipal = new char[filas][columnas];
+        char[][] matrizVisible = new char[filas][columnas];
+        
+    
+    }
+
+    static void MatrizVisible(char[][] matriz){
+        for(int i =0; i < filas; i++){
+            for(int j =0; j < columnas; j++){
+                matriz[i][j] = '~';
+            }
+        }
+    }
+    
+    static void ImprimirMatriz(char[][] matriz){
+        for(int i =0; i < filas; i++){
+            for(int j = 0; j < columnas; j++){
+                System.out.println(matriz[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+
     public static boolean validarColocacionBarco(char[][] tablero, int fila, int col, int tamano) {
     // Verifica que el barco no se salga del tablero
     if (col + tamano > 7) return false;
