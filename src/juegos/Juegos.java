@@ -233,6 +233,7 @@ public static void JugarBattleShip() {
             
             if(turnosRestantes == 0){
                 System.out.println("Se acabaron los turnos");
+                System.out.println("Posicion de los barcos: ");
                 ImprimirMatriz(matrizPrincipal);
                 break;
             }
@@ -312,7 +313,10 @@ public static void JugarBattleShip() {
     static void ImprimirMatriz(int[][] matriz) {
         for (int i = 0; i < 7; i++) {
             for (int j = 0; j < 7; j++) {
-                System.out.print(matriz[i][j] + " ");
+                if(matriz[i][j] == 1)
+                    System.out.print('X' + " ");
+                else
+                    System.out.print('~' + " ");
             }
             System.out.println();
         }
