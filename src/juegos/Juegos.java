@@ -323,22 +323,6 @@ public static void JugarBattleShip() {
     }
     //??para imprimir la visible y la principal
 
-    public static boolean validarColocacionBarco(char[][] tablero, int fila, int col, int tamano) { //?? no encuentro la variable tamano
-        // Verifica que el barco no se salga del tablero
-        if (col + tamano > 7) {
-            return false;
-        }
-
-        // Verifica que no haya otros barcos en las posiciones donde se quiere colocar
-        for (int i = 0; i < tamano; i++) {
-            if (tablero[fila][col + i] != ' ') {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
     public static boolean Ganador(char[][] tablero, int[][] matrizPrincipal) {
         int partesDeBarcosRestantes = 0;
         for (int i = 0; i < tablero.length; i++) {
