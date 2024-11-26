@@ -1,6 +1,7 @@
 package juegos;
 
 import java.util.Scanner;
+import java.util.Random;
 
 public class Juegos {
 
@@ -118,7 +119,7 @@ public class Juegos {
             System.out.println();
 
             if (i < 2) {
-                System.out.println("  -+-+-");
+                System.out.println("---+---+---");
             }
         }
         System.out.println();
@@ -129,25 +130,14 @@ public class Juegos {
     }
 
     public static boolean empate(char[][] tablero) {
-
         for (int i = 0; i < tablero.length; i++) {
             for (int j = 0; j < tablero[i].length; j++) {
                 if (tablero[i][j] == ' ') {
-
-                    for (int x = 0; x < tablero.length; x++) {
-                        for (int y = 0; y < tablero[x].length; y++) {
-                            if (tablero[x][y] == ' ') {
-
-                                return false;
-                            }
-                        }
-                    }
-
+                    return false;
                 }
             }
         }
         return true;
-
     }
 
     public static boolean SimbolosConsecutivos(char[][] tablero) {
@@ -177,28 +167,28 @@ public class Juegos {
 
         return false;
     }
-    
+
     //TERMINA EL JUEGO X-0
     ///
     ///
     ///
     //INICIA BATTLESHIP
-
-    public static void JugarBattleShip() {
+public static void JugarBattleShip() {
         int filas = 7;
         int columnas = 7;
         int turnos = 15;
+        int turnosRestantes = turnos;
 
-        boolean[][] disparosRealizados = new boolean[filas][columnas]; //////// Matriz hecha para rastrear los disparos -Juan
         char[][] matrizPrincipal = new char[filas][columnas];
         char[][] matrizVisible = new char[filas][columnas];
+        
         matrizVisible = MatrizVisible(matrizVisible, filas, columnas); ///////Inicializar La matriz Visible        
-        int turnosRestantes = turnos;
+        boolean[][] disparosRealizados = new boolean[filas][columnas]; //////// Matriz hecha para rastrear los disparos -Juan
 
         int x = -1; /// Inicio las variables en -1 para que entren al while
         int y = -1;
 
-        while (true || turnos > 0) { ////ciclo entero del juego, aca van los boolean que terminan el ciclo - Juan
+        while (true || turnosRestantes > 0) { ////ciclo entero del juego, aca van los boolean que terminan el ciclo - Juan
 
             System.out.println("Turnos restantes: " + turnosRestantes);
 
@@ -224,13 +214,14 @@ public class Juegos {
                 } else {
                     System.out.println("Ya has disparado en " + x + " " + y);
                 }
-
+                
+                registrarDisparo(matrizPrincipal, matrizVisible, x, y);
             }
 
-            if (Ganador(matrizPrincipal)) {
+            if (!Ganador(matrizPrincipal)) {
                 System.out.println("Ha hundido todos los barcos");
                 ImprimirMatriz(matrizPrincipal);
-
+                turnosRestantes = -1;
             }
 
             /// ACA VA EL METODO QUE REGISTRA EL DISPARO YA CUANDO LAS COORDENADAS SEAN VALIDAS
@@ -245,6 +236,16 @@ public class Juegos {
 
     }
 
+    static void registrarDisparo(char[][] matrizPrincipal, char[][] matrizVisible, int fila, int colum) {
+        if (matrizPrincipal[fila][colum] == 'X') {
+            System.out.println("Ha golpeado un barco.");
+            matrizVisible[fila][colum] = 'X';
+        } else {
+            System.out.println("Ha impactado con el agua");
+            matrizVisible[fila][colum] = '~';
+        }
+    }
+
     static char[][] MatrizVisible(char[][] matriz, int filas, int columnas) {
         for (int i = 0; i < filas; i++) {
             for (int j = 0; j < columnas; j++) {
@@ -254,7 +255,7 @@ public class Juegos {
         return matriz;
     }
 
-    static void ImprimirMatriz(char[][] matriz) {  
+    static void ImprimirMatriz(char[][] matriz) {
         for (int i = 0; i < 7; i++) {
             for (int j = 0; j < 7; j++) {
                 System.out.print(matriz[i][j] + " ");
@@ -281,16 +282,16 @@ public class Juegos {
     }
 
     public static boolean Ganador(char[][] tablero) {
+        int partesDeBarcosRestantes = 0;
         for (int i = 0; i < tablero.length; i++) {
             for (int j = 0; j < tablero[i].length; j++) {
-                if (tablero[i][j] == 'X') {///////// Aqui va la variable que se utiliza si hay un barco
-                    return false;
-
+                if (tablero[i][j] == 'X') { // Busca partes de barcos
+                    partesDeBarcosRestantes++;
                 }
             }
         }
+        return partesDeBarcosRestantes == 0; // Ganador si no hay partes restantes
     }
-    //??FALTA EL PARAMETRO DE LA MATRIZ PRINCIPAL
 
     public static boolean validarDisparo(boolean[][] disparosRealizados, int x, int y) {
         // Revisar la matriz que rastrea los disparos para ver si ya uso esas coordenadas
@@ -302,7 +303,6 @@ public class Juegos {
         disparosRealizados[x][y] = true;
         return true;
     }
-    
-    //TERMINA BATTLESHIP
 
+    //TERMINA BATTLESHIP
 }
