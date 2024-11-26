@@ -1,8 +1,13 @@
 package juegos;
+
 import java.util.Scanner;
 
 public class Juegos {
+<<<<<<< HEAD
  
+=======
+
+>>>>>>> d277148e97def6653e9750245a01222950e30dd6
     static Scanner leer = new Scanner(System.in);
     static int turno = 0; ///////La variable turno tiene que ser static -Juan Fernando
 
@@ -35,7 +40,10 @@ public class Juegos {
                     break;
                 }
                 case 2: {
+<<<<<<< HEAD
                     JugarBattleShip();
+=======
+>>>>>>> d277148e97def6653e9750245a01222950e30dd6
                     break;
                 }
                 default: {
@@ -102,21 +110,27 @@ public class Juegos {
         return tablero;
     }
 
+<<<<<<< HEAD
     public static void imprimirTableroX0(char[][] tablero){
         for(int i = 0; i < tablero.length; i++){
             for(int j = 0; j < tablero[i].length; j++){
                 if(j < 2){
+=======
+    public static void imprimirTableroX0(char[][] tablero) {
+        for (int i = 0; i < tablero.length; i++) {
+            for (int j = 0; j < tablero[i].length; j++) {
+                if (j < 2) {
+>>>>>>> d277148e97def6653e9750245a01222950e30dd6
                     System.out.print(" " + tablero[i][j] + " |");
-                }
-                else{
+                } else {
                     System.out.print(" " + tablero[i][j]);
                 }
             }
             System.out.println();
-            if(i < 2){
-                System.out.println("---+---+---");
-            }            
+<<<<<<< HEAD
+            if (i < 2) System.out.println("  -+-+-");
         }
+        System.out.println();
     }
 
     public static boolean ganador(char[][] tablero, char jugador) {
@@ -173,6 +187,7 @@ public class Juegos {
         return false;
     }
     
+<<<<<<< HEAD
     
     public static void JugarBattleShip(){
         int filas = 7;
@@ -277,12 +292,135 @@ public class Juegos {
             for(int j = 0; j < tablero[i].length; j++){
                 if (tablero[i][j] == 'X'){///////// Aqui va la variable que se utiliza si hay un barco
                     return false;
+=======
+    public static boolean Empate(char[][] tablero){
+        for (int i = 0; i < 3;i++){
+            for(int j = 0; j < 3; j++){
+                if(tablero[i][j] != 'x' || tablero[i][j] != 'X' && tablero[i][j] != '0')
+                    return false;
+=======
+            if (i < 2) {
+                System.out.println("---+---+---");
+>>>>>>> eb8e110358331ea57f038d7f8288505bb7f23fef
+            }
+        }
+    }
+<<<<<<< HEAD
+
+    
+  
+}
+=======
+>>>>>>> eb8e110358331ea57f038d7f8288505bb7f23fef
+
+    public static boolean ganador(char[][] tablero, char jugador) {
+        return SimbolosConsecutivos(tablero); //Aqui retorna quien fue el jugador que gano
+    }
+
+    public static boolean empate(char[][] tablero) {
+
+        for (int i = 0; i < tablero.length; i++) {
+            for (int j = 0; j < tablero[i].length; j++) {
+                if (tablero[i][j] == ' ') {
+
+                    for (int x = 0; x < tablero.length; x++) {
+                        for (int y = 0; y < tablero[x].length; y++) {
+                            if (tablero[x][y] == ' ') {
+
+                                return false;
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
+        return true;
+
+    }
+
+    public static boolean SimbolosConsecutivos(char[][] tablero) {
+        // Verificar filas
+        for (int i = 0; i < 3; i++) {
+            if (tablero[i][0] != ' ' && tablero[i][0] == tablero[i][1] && tablero[i][1] == tablero[i][2]) {
+                return true;
+            }
+        }
+
+        // Verificar columnas
+        for (int j = 0; j < 3; j++) {
+            if (tablero[0][j] != ' ' && tablero[0][j] == tablero[1][j] && tablero[1][j] == tablero[2][j]) {
+                return true;
+            }
+        }
+
+        // Verificar diagonal principal
+        if (tablero[0][0] != ' ' && tablero[0][0] == tablero[1][1] && tablero[1][1] == tablero[2][2]) {
+            return true;
+        }
+
+        // Verificar diagonal secundaria
+        if (tablero[0][2] != ' ' && tablero[0][2] == tablero[1][1] && tablero[1][1] == tablero[2][0]) {
+            return true;
+        }
+
+        return false;
+    }
+    
+    
+    public static void JugarBattleShip(){
+        int filas = 7;
+        int columnas = 7;
+        int turnos = 15;
+        
+        char[][] matrizPrincipal = new char[filas][columnas];
+        char[][] matrizVisible = new char[filas][columnas];
+        
+    
+    }
+
+    static void MatrizVisible(char[][] matriz){
+        for(int i =0; i < filas; i++){
+            for(int j =0; j < columnas; j++){
+                matriz[i][j] = '~';
+            }
+        }
+    }
+    
+    static void ImprimirMatriz(char[][] matriz){
+        for(int i =0; i < filas; i++){
+            for(int j = 0; j < columnas; j++){
+                System.out.println(matriz[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    public static boolean validarColocacionBarco(char[][] tablero, int fila, int col, int tamano) {
+    // Verifica que el barco no se salga del tablero
+    if (col + tamano > 7) return false;
+    
+    // Verifica que no haya otros barcos en las posiciones donde se quiere colocar
+    for (int i = 0; i < tamano; i++) {
+        if (tablero[fila][col + i] != ' ') return false;
+    }
+    
+    return true;
+}
+
+    public static boolean Ganador(char[][] tablero){
+        for(int i = 0; i < tablero.length; i++){
+            for(int j = 0; j < tablero[i].length; j++){
+                if (tablero[i][j] == 'X'){///////// Aqui va la variable que se utiliza si hay un barco
+                    return false;
+>>>>>>> d277148e97def6653e9750245a01222950e30dd6
                 }
             }
         }
     return true;
     }
 
+<<<<<<< HEAD
     public static boolean validarDisparo(boolean[][] disparosRealizados, int x, int y) {
         // Revisar la matriz que rastrea los disparos para ver si ya uso esas coordenadas
         if (disparosRealizados[x][y]) {
@@ -294,4 +432,6 @@ public class Juegos {
         return true;
     }
     
+=======
+>>>>>>> d277148e97def6653e9750245a01222950e30dd6
 }
